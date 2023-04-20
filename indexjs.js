@@ -17,9 +17,7 @@ allNavButton.forEach((button) => {
     })
 })   
 
-// const newTaskOnList = () => {
-    
-// }
+
 
 const createTaskForm = document.querySelector('.create-task-block');
 createTaskForm.addEventListener('submit', (event) => {
@@ -29,7 +27,7 @@ createTaskForm.addEventListener('submit', (event) => {
     const taskNameInput = target.taskName;
     const inputValue = taskNameInput.value;
 
-    const newTask = document.createElement('div');
+    const newTask = document.createElement('li');
     newTask.className = 'task-item';
     newTask.dataset.id = Date.now();
     
@@ -134,3 +132,16 @@ taskNameInput.addEventListener('input', (event) => {
         messegeBlockFromDOM.remove()
     }
 })
+
+
+
+buttonDelete.addEventListener('click', (event) => {
+    const { target } = event;
+    const buttonDelete = document.querySelector(`[data-task-id]=${target}`);
+    if (buttonDelete) {
+        const deleteConfirmed = confirm('Вы уверены?');
+        if(deleteConfirmed) {
+            buttonDelete.remove();
+        }
+    }
+}) 
