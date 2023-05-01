@@ -62,7 +62,7 @@ body {
     position: relative;
 }
 
-.create-task-block__input {
+#create-task-block__input {
     border: 2px solid var(--primary-color);
     border-radius: 5px;
     color: var(--primary-color);
