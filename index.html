@@ -4,50 +4,79 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap" rel="stylesheet">
   <title>Работа с DOM</title>
 </head>
 <body>
-  <div class="main-navigation">
-    <a
-      class="main-navigation__button-item"
-      href="#tasks_today"
-      data-button-id="1"
-    >
-      Задачи на Сегодня
-    </a>
-    <a
-      class="main-navigation__button-item"
-      href="#tasks_week"
-      data-button-id="2"
-    >
-      Задачи на Эту Неделю
-    </a>
-    <a
-      class="main-navigation__button-item"
-      href="#tasks_later"
-      data-button-id="3"
-    >
-      Задачи на Потом
-    </a>
+  <div class="container">
+    <div class="main-navigation">
+      <div class="main-navigation_name">
+        <img src="img/Logo.svg" alt="">
+        <a
+        class="main-navigation__button-item"
+        href="#tasks_today"
+        id = "main-navigation__button-name"
+      >
+        ДВУ ЦРиНО
+      </a>
+      </div>
+      <div class="main-navigation_menu-button">
+      <a
+        class="main-navigation__button-item"
+        href="#tasks_today"
+        data-button-id="1"
+      >
+        Задачи на Сегодня
+      </a>
+      <a
+        class="main-navigation__button-item"
+        href="#tasks_week"
+        data-button-id="2"
+      >
+        Задачи на Эту Неделю
+      </a>
+      <a
+        class="main-navigation__button-item"
+        href="#tasks_later"
+        data-button-id="3"
+      >
+        Задачи на Потом
+      </a>
+      </div>
+    </div>
   </div>
   <div id="tasks">
     <div class="tasks__wrapper">
       <form class="create-task-block">
-        <input
+        <div class="create-task-block_forms">
+          <input
           name="taskName"
           class="create-task-block__input default-text-input"
           type="text"
           placeholder="Создайте новую задачу"
-          value=""
-          >
+          value="">
+          <input
+          name="taskSupervise"
+          class="create-task-block__input default-text-input"
+          type="text"
+          placeholder="Выберете исполнителя"
+          value="">
+          <input
+          name="taskData"
+          class="create-task-block__input default-text-input"
+          type="data"
+          placeholder="Срок выполнения"
+          value="">
         <button
           type="submit"
           class="create-task-block__button default-button">
           Создать
         </button>
       </form>
-      <ul class="tasks-list">
+    </div>
+      <div class="tasks-list_panel">
+        <ul class="tasks-list">
         <!-- <li class="task-item" data-task-id="1">
           <div class="task-item__main-container">
             <div class="task-item__main-content">
@@ -55,16 +84,18 @@
                 <input class="checkbox-form__checkbox" type="checkbox" id="task-1">
                 <label for="task-1"></label>
               </form>
-              <span class="task-item__text">Посмотреть новый урок по JavaScript</span>
+                <span class="task-item__text">...</span>
+              </div>
+              <button data-action = "delete" class="task-item__delete-button default-button delete-button" data-delete-task-id="5">
+               Удалить
+              </button>
             </div>
-            <button data action = "delete" class="task-item__delete-button default-button delete-button" data-delete-task-id="5">
-              Удалить
-            </button>
-          </div>
-        </li> -->
-      </ul>
-    </div>
+          </li> -->
+        </ul>
+      </div>
   </div>
+  </div>
+</div>
   <script src="indexjs.js"></script>
 </body>
 </html>

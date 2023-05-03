@@ -1,10 +1,8 @@
-
-
 :root {
-    --primary-color: #546791;
-    --text-color: #ffffff;
+    --primary-color: #0179c0;
+    --text-color: #0179c0;
     --delete-button-background: #FF0000;
-    --checkbox-checked-background: #546791;
+    --checkbox-checked-background: #0179c0;
     --checkbox-border-color: #000;
     --checkbox-text-color: #fff;
     --default-border-color: #000;
@@ -14,11 +12,16 @@
 html {
     font-size: 10px;
     line-height: 10px;
+    font-family: "Inter",sans-serif;
 }
 
 body {
     padding: 0;
     margin: 0;
+}
+
+.container {
+    padding: 0.5rem 2em;
 }
 
 #tasks {
@@ -40,18 +43,42 @@ body {
 
 .main-navigation {
     display: flex;
-    justify-content: space-evenly;
-    background-color: var(--primary-color);
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: var(--primary-color); */
+}
+
+.main-navigation__headline {
+
+}
+
+.main-navigation_name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-navigation_menu-button {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .main-navigation__button-item {
     position: relative;
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
     color: var(--text-color);
     padding: 25px;
     text-decoration: none;
     font-size: 2rem;
-    line-height: 2.5rem;
+    line-height: 2rem;
+}
+
+#main-navigation__button-name {
+    color: var(--text-color);
+    padding: 25px;
+    text-decoration: none;
+    font-size: 3rem;
+    line-height: 2em;
 }
 
 .main-navigation__button-item_selected {
@@ -60,11 +87,12 @@ body {
 
 .create-task-block {
     position: relative;
+    margin: 0 auto;
 }
 
-#create-task-block__input {
+.create-task-block__input {
     border: 2px solid var(--primary-color);
-    border-radius: 5px;
+    border-radius: 2px;
     color: var(--primary-color);
   
     font-size: 2rem;
@@ -72,7 +100,7 @@ body {
     height: 40px;
     width: 50%;
     padding: 0;
-    margin-bottom: 40px;
+    margin-bottom: 5px;
 }
 
 .create-task-block__button {
@@ -87,7 +115,7 @@ body {
     color: var(--text-color);
     border: none;
     padding: 5px 20px;
-    border-radius: 5px;
+    border-radius: 2px;
   
     font-size: 1.5rem;
     line-height: 2.5rem;

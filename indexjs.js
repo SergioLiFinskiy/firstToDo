@@ -2,6 +2,22 @@
 const form = document.querySelector('.create-task-block');
 const taskInput = document.querySelector('.create-task-block__input');
 const taskList = document.querySelector('.tasks-list');
+const allNavButton = document.querySelectorAll('.main-navigation__button-item');
+
+allNavButton.forEach((button) => {
+    button.addEventListener('mouseover', (event) => {
+        allNavButton.forEach((button) => {
+            button.classList.remove('main-navigation__button-item_selected')
+        });
+        const { target } = event;
+        target.classList.add('main-navigation__button-item_selected');
+    })
+
+    button.addEventListener('mouseout', (event) => {
+        const { target } = event;
+        target.classList.remove('main-navigation__button-item_selected');    
+    })
+}) 
 
 form.addEventListener('submit', addTask);
 
@@ -42,7 +58,6 @@ function addTask (event) {
 
 function deleteTask(event) {
    if (event.target.dataset.action === "delete") {
-   
     const parentNote = event.target.closest('.task-item');
     parentNote.remove()
    }
