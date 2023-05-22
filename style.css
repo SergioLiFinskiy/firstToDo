@@ -9,47 +9,38 @@
     --error-color: #FF0000;
 }
 
-html {
+* {
     font-size: 10px;
     line-height: 10px;
     font-family: "Inter",sans-serif;
 }
 
-body {
-    padding: 0;
-    margin: 0;
-}
-
 .container {
-    padding: 0.5rem 2em;
+    margin: 1vh 20vw;
 }
 
-#tasks {
+.tasks {
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    padding: 20px;
 }
 
 .tasks__wrapper {
-    max-width: 70%;
-    width: 100%;
+    margin: 0 0 2vh;
 }
 
-.tasks__wrapper_hidden {
-    display: none;
+.tasks__wrapper span {
+    color: var(--text-color);
+    margin: 0 0 25px;
+    text-decoration: none;
+    font-size: 3rem;
+    line-height: 5rem;
 }
 
 .main-navigation {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    /* background-color: var(--primary-color); */
-}
-
-.main-navigation__headline {
-
+    margin: 0 0 2vh 0;
 }
 
 .main-navigation_name {
@@ -65,7 +56,6 @@ body {
 
 .main-navigation__button-item {
     position: relative;
-    /* background-color: var(--primary-color); */
     color: var(--text-color);
     padding: 25px;
     text-decoration: none;
@@ -82,60 +72,86 @@ body {
 }
 
 .main-navigation__button-item_selected {
-    box-shadow: inset 0 0 0 4px #fff;
+    box-shadow: inset 0 0 0 2px #B0E0E6;
+    border-radius: 4px;
+
 }
 
 .create-task-block {
-    position: relative;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: [full-start] 3fr [content-start] 1fr [content-end] 1fr [full-end];
+    column-gap: 10px;
+    row-gap: 5px;
 }
 
 .create-task-block__input {
-    border: 2px solid var(--primary-color);
-    border-radius: 2px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
     color: var(--primary-color);
-  
+    font-style: normal;
+    font-weight: 300;
     font-size: 2rem;
     line-height: 2.5rem;
-    height: 40px;
-    width: 50%;
-    padding: 0;
-    margin-bottom: 5px;
+    opacity: 0.3;
 }
 
 .create-task-block__button {
-    height: 44px;
-}
-
-.create-task-block__button,
-.task-item__delete-button {
     cursor: pointer;
-
     background-color: var(--primary-color);
-    color: var(--text-color);
+    color: #fff;
     border: none;
     padding: 5px 20px;
-    border-radius: 2px;
-  
+    border-radius: 4px;
     font-size: 1.5rem;
     line-height: 2.5rem;
+    grid-column-start: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+}
+.task-item__delete-button {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+}
+
+#createNewTask {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+#selectedContractor {
+    grid-column-start: 2;
+    grid-row-start: 1;
+
+}
+
+#createDeadline {
+    grid-column-start: 2;
+    grid-row-start: 2;
 }
 
 .task-item {
-    width: 100%;
+    display: flex;
+    justify-content: space-between;
     font-size: 1.5rem;
     line-height: 2.5rem;
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
     padding: 10px 0;
-
-    display: flex;
-    flex-direction: column;
+    list-style-type: none;
 }
 
 .task-item__main-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 
 .task-item__main-content {
@@ -147,18 +163,46 @@ body {
     transition: 0.2s ease;
 }
 
-.task-item__delete-button {
-    position: relative;
-}
-
 .task-item__delete-button:hover {
     background-color: var(--delete-button-background);
 }
 
-.task-item__text {
+.task-item__main-content_info {
+    color: var(--text-color);
+    display: grid;
+    grid-template-columns: [full-start] 3fr [content-start] 1fr [content-end] ;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 1vw;
+    align-items: center;
+}
+
+.task-item__text { 
     font-size: 2rem;
     line-height: 2.5rem;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    align-items: center;
 }
+
+.task-item__name {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    align-items: center;
+}
+
+.task-item__data {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    align-items: center;
+    justify-content: stretch;
+}
+
 
 .checkbox-form__checkbox + label {
     display: block;

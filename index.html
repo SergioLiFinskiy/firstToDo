@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="main-navigation">
+    <header class="main-navigation">
       <div class="main-navigation_name">
         <img src="img/Logo.svg" alt="">
         <a
@@ -31,71 +31,70 @@
       </a>
       <a
         class="main-navigation__button-item"
-        href="#tasks_week"
-        data-button-id="2"
-      >
-        Задачи на Эту Неделю
-      </a>
-      <a
-        class="main-navigation__button-item"
         href="#tasks_later"
         data-button-id="3"
       >
         Задачи на Потом
       </a>
       </div>
-    </div>
-  </div>
-  <div id="tasks">
-    <div class="tasks__wrapper">
-      <form class="create-task-block">
-        <div class="create-task-block_forms">
-          <input
-          name="taskName"
-          class="create-task-block__input default-text-input"
-          type="text"
-          placeholder="Создайте новую задачу"
-          value="">
-          <input
-          name="taskSupervise"
-          class="create-task-block__input default-text-input"
-          type="text"
-          placeholder="Выберете исполнителя"
-          value="">
-          <input
-          name="taskData"
-          class="create-task-block__input default-text-input"
-          type="data"
-          placeholder="Срок выполнения"
-          value="">
-        <button
-          type="submit"
-          class="create-task-block__button default-button">
-          Создать
-        </button>
-      </form>
-    </div>
+    </header>
+    <div class="tasks">
+      <div class="tasks__wrapper">
+        <span>Создать новое поручение:</span>
+        <form class="create-task-block">
+            <input
+              name="taskName"
+              class="create-task-block__input default-text-input"
+              type="text"
+              placeholder="Создайте новую задачу"
+              value=""
+              id="createNewTask">
+            <input
+              name="taskSupervise"
+              class="create-task-block__input default-text-input"
+              type="text"
+              placeholder="Выберете исполнителя"
+              value=""
+              id="selectedContractor">
+            <input
+              name="taskData"
+              class="create-task-block__input default-text-input"
+              type="date"
+              placeholder="Срок выполнения"
+              value=""
+              id="createDeadline">
+          <button
+            type="submit"
+            class="create-task-block__button default-button">
+            Создать
+          </button>
+        </form>
+      </div>
       <div class="tasks-list_panel">
         <ul class="tasks-list">
-        <!-- <li class="task-item" data-task-id="1">
-          <div class="task-item__main-container">
+          <!-- <li class="task-item" id=${newTask.id}>
+        <div class="task-item__main-container">
             <div class="task-item__main-content">
-              <form class="checkbox-form">
+                <form class="checkbox-form">
                 <input class="checkbox-form__checkbox" type="checkbox" id="task-1">
                 <label for="task-1"></label>
-              </form>
-                <span class="task-item__text">...</span>
-              </div>
-              <button data-action = "delete" class="task-item__delete-button default-button delete-button" data-delete-task-id="5">
-               Удалить
-              </button>
+                </form>
+                <div class="task-item__main-content_info">
+                    <div class="task-item__text">${newTask.text}</div>
+                    <div class="task-item__name">${newTask.name}</div>
+                    <div class="task-item__data">${newTask.date}</div>
+                </div>
+                </div>
             </div>
-          </li> -->
+            <button data-action = "delete" class="task-item__delete-button default-button delete-button" data-delete-task-id="5">
+                Удалить
+            </button>
+        </div>
+    </li> -->
         </ul>
       </div>
+    </div>
   </div>
-  </div>
-</div>
   <script src="indexjs.js"></script>
 </body>
 </html>
