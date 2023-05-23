@@ -1,14 +1,13 @@
 // Find element
-const form = document.querySelector('.create-task-block');
-const taskInfo = document.querySelector('.task-item__main-content_info');
-const taskInputWords = document.querySelector('#createNewTask');
-const taskInputName = document.querySelector('#selectedContractor');
-const taskInputData = document.querySelector('#createDeadline');
-const taskList = document.querySelector('.tasks-list');
-const allNavButton = document.querySelectorAll('.main-navigation__button-item');
-const checkBox = document.querySelectorAll('.checkbox-form__checkbox');
-
-
+const   form = document.querySelector('.create-task-block'),
+        taskInfo = document.querySelector('.task-item__main-content_info'),
+        taskInputWords = document.querySelector('#createNewTask'),
+        taskInputName = document.querySelector('#selectedContractor'),
+        taskInputData = document.querySelector('#createDeadline'),
+        taskList = document.querySelector('.tasks-list'),
+        allNavButton = document.querySelectorAll('.main-navigation__button-item'),
+        checkBox = document.querySelectorAll('.checkbox-form__checkbox');
+        
 let tasks = [];
 
 if (localStorage.getItem('tasks')){
