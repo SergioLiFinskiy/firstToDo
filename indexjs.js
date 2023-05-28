@@ -1,3 +1,10 @@
+// Добавить сортировку по исполнителям 
+// Добавить выпадающее меню исполнителей по списку задач (Z-index)
+// Скорректировать верстку (Padding или margin у контейнера, что бы кнопка создать и поля формы уменьшались)
+// Добавить отметку выполнения выполненных задач (перечеркивание текста задачи при постановке галочки) + напоминание об удалении
+// Графики на дашборде
+// Общий рефакторинг перед отправкой Ромке
+
 // Find element
 const   form = document.querySelector('.create-task-block'),
         taskInfo = document.querySelector('.task-item__main-content_info'),
@@ -9,6 +16,8 @@ const   form = document.querySelector('.create-task-block'),
         checkBox = document.querySelectorAll('.checkbox-form__checkbox');
         
 let tasks = [];
+let taskSortOfName = [];
+let taskSortUniq = [];
 
 if (localStorage.getItem('tasks')){
     tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -59,8 +68,6 @@ form.addEventListener('submit', addTask);
 
 taskList.addEventListener('click', deleteTask);
 
-taskList.addEventListener('click', doneTask);
-
 function addTask (event) {
     // Stop restart
     event.preventDefault();
@@ -79,6 +86,8 @@ function addTask (event) {
     };
     
     tasks.push(newTask);
+    taskSortOfName.push(newTask.name);
+    taskSortUniq = Array.from(new Set(taskSortOfName));
 
     saveToLocalStorage();
 
@@ -127,4 +136,15 @@ function deleteTask(event) {
 
 function saveToLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
+function sortOfName() {
+    for (let i = 0; i <= taskSortUniq.length; i++) {
+        let optn = taskSortUniq[i];
+        let el = document.createElement("option");
+        let select = document.querySelector('#sortName');
+        el.textContent = optn;
+        el.value = optn;
+        select.appendChild(el);
+    } 
 }
