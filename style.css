@@ -280,3 +280,13 @@
     line-height: 2rem;
     color: var(--error-color);
 }
+
+#sortName {
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    color: var(--primary-color);
+    font-style: normal;
+    font-weight: 300;
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
