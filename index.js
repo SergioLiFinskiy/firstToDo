@@ -41,11 +41,23 @@ function addTask (event) {
         done: false,
     };
 
-    tasks.push(newTask);
-    console.log(taskSortOfName)
+    //Adding an option to select with a uniqueness check
+    if (taskSortUniq.indexOf(newTask.name) != -1) {
+        console.log('Этот уже есть')}
 
-    // taskSortOfName.push(newTask.name);
-    // taskSortUniq = Array.from(new Set(taskSortOfName));
+    else {
+        let el = document.createElement("option");     
+        el.textContent = newTask.name;
+        el.value = newTask.name;
+        select.appendChild(el);
+    }
+
+    tasks.push(newTask);
+    taskSortOfName.push(newTask.name);
+    taskSortUniq = Array.from(new Set(taskSortOfName));
+    // taskSortUniq = taskSortOfName.filter((item, index) => {
+    //     return taskSortOfName.indexOf(item) === index;
+    // })
 
     saveToLocalStorage();
 
@@ -99,23 +111,43 @@ function clearPositionOfLocalStorage() {
 
 function deleteTask(event) {
     if (event.target.dataset.action === "delete") {
-    const parentNote = event.target.closest('.task-item');
-    const id = Number(parentNote.id); 
-    nameInTask = document.querySelector('.task-item__name');
-    const name = nameInTask.value; 
-    tasks = tasks.filter((task) => task.id !== id);
+        const parentNote = event.target.closest('.task-item');
 
-    taskSortOfName = taskSortOfName.splice(taskSortOfName.indexOf(name), 1);
+        const id = Number(parentNote.id); 
 
-    taskSortUniq = Array.from(new Set(taskSortOfName));
-    
-    // taskSortUniq = taskSortUniq.splice(taskSortUniq.indexOf(name), 1);
 
-    parentNote.remove();    
-    clearPositionOfLocalStorage();
-    saveToLocalStorage();
+        nameInTask = document.querySelector('.task-item__name');
+        const name = nameInTask.value; 
+        tasks = tasks.filter((task) => task.id !== id);
+        // Проверить индексы при удалении, а то фигово список выводит
+
+        taskSortOfName.splice(taskSortOfName.indexOf(name), 1);
+
+        taskSortUniq = Array.from(new Set(taskSortOfName));
+
+
+        // removechild javascript определенных элементов - загуглить
+        
+        if (taskSortUniq.indexOf() == -1) {
+            let optionCollection = document.getElementsByTagName("option");
+            allOption = Array.from(optionCollection);
+            let uniqOptions = allOption.map(elem => {return elem.innerText});
+            let indexOptions = uniqOptions.indexOf(name);
+            // let children = select.children;
+            select.removeChild(select.children[indexOptions])
+            console.log(select)}
+        else {
+            console.log('Этот исполнитель уже отсутсвует')
+        }
+
+        saveToLocalStorage();    
+        // clearPositionOfLocalStorage();
+        parentNote.remove();    
     }
- }
+}
 
 form.addEventListener('submit', addTask);
 taskList.addEventListener('click', deleteTask);
+
+
+

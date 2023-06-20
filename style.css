@@ -290,3 +290,21 @@
     font-size: 2rem;
     line-height: 2.5rem;
 }
+
+#sortName {
+    padding: 5px 20px;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+}
+
+.sortName_btn {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+}
