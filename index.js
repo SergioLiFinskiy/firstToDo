@@ -1,4 +1,11 @@
+// Добавить сортировку по исполнителям 
+// Добавить выпадающее меню исполнителей по списку задач (Z-index)
+// Скорректировать верстку (Padding или margin у контейнера, что бы кнопка создать и поля формы уменьшались)
+// Добавить отметку выполнения выполненных задач (перечеркивание текста задачи при постановке галочки) + напоминание об удалении
+// Графики на дашборде
+// Общий рефакторинг перед отправкой Ромке
 
+// Find element
 const   form = document.querySelector('.create-task-block'),
         taskInfo = document.querySelector('.task-item__main-content_info'),
         taskInputWords = document.querySelector('#createNewTask'),
@@ -9,20 +16,41 @@ const   form = document.querySelector('.create-task-block'),
         checkBox = document.querySelectorAll('.checkbox-form__checkbox'),
         select = document.querySelector('#sortName'),
         taskItem = document.querySelectorAll('.task-item');
-        
+
 let tasks = [];
 let taskSortOfName = [];
 let taskSortUniq = [];
-
-tasks.forEach((task) => {
-    renderTask (task);
-})
 
 if (localStorage.getItem('tasks')){
     tasks = JSON.parse(localStorage.getItem('tasks'));
     taskSortOfName = JSON.parse(localStorage.getItem('name'));
     taskSortUniq = JSON.parse(localStorage.getItem('sortName'));
 }
+
+tasks.forEach((task) => {
+    renderTask (task);
+})
+
+allNavButton.forEach((button) => {
+    button.addEventListener('mouseover', (event) => {
+        allNavButton.forEach((button) => {
+            button.classList.remove('main-navigation__button-item_selected')
+        });
+        const { target } = event;
+        target.classList.add('main-navigation__button-item_selected');
+    })
+
+    button.addEventListener('mouseout', (event) => {
+        const { target } = event;
+        target.classList.remove('main-navigation__button-item_selected');    
+    })
+}) 
+
+form.addEventListener('submit', addTask);
+
+taskList.addEventListener('click', deleteTask);
+
+// select.addEventListener('click', sortOfName);
 
 function addTask (event) {
     // Stop restart
@@ -41,28 +69,14 @@ function addTask (event) {
         done: false,
     };
 
-    //Adding an option to select with a uniqueness check
-    if (taskSortUniq.indexOf(newTask.name) != -1) {
-        console.log('Этот уже есть')}
-
-    else {
-        let el = document.createElement("option");     
-        el.textContent = newTask.name;
-        el.value = newTask.name;
-        select.appendChild(el);
-    }
-
     tasks.push(newTask);
     taskSortOfName.push(newTask.name);
     taskSortUniq = Array.from(new Set(taskSortOfName));
-    // taskSortUniq = taskSortOfName.filter((item, index) => {
-    //     return taskSortOfName.indexOf(item) === index;
-    // })
-
+    
     saveToLocalStorage();
 
     // Make task
-    renderTask(newTask); 
+    renderTask(newTask);
 
     // Null of value on start
     taskInputWords.value = "";
@@ -71,9 +85,53 @@ function addTask (event) {
     taskInputWords.focus();
 }
 
+function deleteTask(event) {
+   if (event.target.dataset.action === "delete") {
+    const parentNoteId = event.target.closest('.task-item');
+    const id = Number(parentNoteId.id); 
+    const uniqName = String(parentNoteId.dataset.value);
+    tasks = tasks.filter((task) => task.id !== id);
+
+    const deleteItemFromTaskSortOfName = (names) => {
+        const index = names.indexOf(uniqName)
+        names.splice(index, 1)
+        return names
+    }
+
+    deleteItemFromTaskSortOfName(taskSortOfName)
+
+    taskSortUniq = Array.from(new Set(taskSortOfName));
+
+    clearPositionOfLocalStorageTasks();
+    clearPositionOfLocalStorageName();
+    clearPositionOfLocalStorageUniqName();
+
+    saveToLocalStorage();
+    parentNoteId.remove();
+   }
+}
+
+function saveToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem('name', JSON.stringify(taskSortOfName));
+    localStorage.setItem('sortName', JSON.stringify(taskSortUniq));
+}
+
+function clearPositionOfLocalStorageTasks() {
+    localStorage.removeItem('tasks', JSON.stringify(tasks));
+}
+
+function clearPositionOfLocalStorageName() {
+    localStorage.removeItem('sortName', JSON.stringify(taskSortUniq));
+}
+
+function clearPositionOfLocalStorageUniqName() {
+    localStorage.removeItem('sortName', JSON.stringify(taskSortUniq));
+}
+
 function renderTask (task) {
     const taskHTML = `
-    <li class="task-item" id=${task.id}>
+    <li class="task-item" id=${task.id} data-value='${task.name}'>
         <div class="task-item__main-container">
             <div class="task-item__main-content">
                 <form class="checkbox-form">
@@ -97,57 +155,14 @@ function renderTask (task) {
     taskList.insertAdjacentHTML('beforeend',taskHTML);
 }
 
-function saveToLocalStorage() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    localStorage.setItem('name', JSON.stringify(taskSortOfName));
-    localStorage.setItem('sortName', JSON.stringify(taskSortUniq));
-}
-
-function clearPositionOfLocalStorage() {
-    localStorage.removeItem('tasks');
-    localStorage.removeItem('name');
-    localStorage.removeItem('sortName');
-}
-
-function deleteTask(event) {
-    if (event.target.dataset.action === "delete") {
-        const parentNote = event.target.closest('.task-item');
-
-        const id = Number(parentNote.id); 
-
-
-        nameInTask = document.querySelector('.task-item__name');
-        const name = nameInTask.value; 
-        tasks = tasks.filter((task) => task.id !== id);
-        // Проверить индексы при удалении, а то фигово список выводит
-
-        taskSortOfName.splice(taskSortOfName.indexOf(name), 1);
-
-        taskSortUniq = Array.from(new Set(taskSortOfName));
-
-
-        // removechild javascript определенных элементов - загуглить
-        
-        if (taskSortUniq.indexOf() == -1) {
-            let optionCollection = document.getElementsByTagName("option");
-            allOption = Array.from(optionCollection);
-            let uniqOptions = allOption.map(elem => {return elem.innerText});
-            let indexOptions = uniqOptions.indexOf(name);
-            // let children = select.children;
-            select.removeChild(select.children[indexOptions])
-            console.log(select)}
-        else {
-            console.log('Этот исполнитель уже отсутсвует')
-        }
-
-        saveToLocalStorage();    
-        // clearPositionOfLocalStorage();
-        parentNote.remove();    
-    }
-}
-
-form.addEventListener('submit', addTask);
-taskList.addEventListener('click', deleteTask);
-
-
-
+// function sortOfName(event) {
+//     event.preventDefault();
+//     // select.innerHTML = '';
+//     for (let i = 0; i < taskSortUniq.length; i++) {
+//         let optn = taskSortUniq[i];
+//         let el = document.createElement("option");     
+//         el.textContent = optn;
+//         el.value = optn;
+//         select.appendChild(el);
+//     }
+// }
