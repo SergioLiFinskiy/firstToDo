@@ -1,11 +1,9 @@
 // Добавить сортировку по исполнителям 
-// Добавить выпадающее меню исполнителей по списку задач (Z-index)
 // Скорректировать верстку (Padding или margin у контейнера, что бы кнопка создать и поля формы уменьшались)
 // Добавить отметку выполнения выполненных задач (перечеркивание текста задачи при постановке галочки) + напоминание об удалении
 // Графики на дашборде
 // Общий рефакторинг перед отправкой Ромке
 
-// Find element
 const   form = document.querySelector('.create-task-block'),
         taskInfo = document.querySelector('.task-item__main-content_info'),
         taskInputWords = document.querySelector('#createNewTask'),
@@ -15,11 +13,14 @@ const   form = document.querySelector('.create-task-block'),
         allNavButton = document.querySelectorAll('.main-navigation__button-item'),
         checkBox = document.querySelectorAll('.checkbox-form__checkbox'),
         select = document.querySelector('#sortName'),
-        taskItem = document.querySelectorAll('.task-item');
+        selectBtn = document.querySelector('.sortName_btn');
+        
 
 let tasks = [];
 let taskSortOfName = [];
 let taskSortUniq = [];
+
+
 
 if (localStorage.getItem('tasks')){
     tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -50,13 +51,11 @@ form.addEventListener('submit', addTask);
 
 taskList.addEventListener('click', deleteTask);
 
-// select.addEventListener('click', sortOfName);
+selectBtn.addEventListener('click', sortOfName);
 
 function addTask (event) {
-    // Stop restart
     event.preventDefault();
 
-    // Take value from form
     const taskText = taskInputWords.value;
     const taskName = taskInputName.value;
     const taskData = taskInputData.value;
@@ -75,10 +74,8 @@ function addTask (event) {
     
     saveToLocalStorage();
 
-    // Make task
     renderTask(newTask);
 
-    // Null of value on start
     taskInputWords.value = "";
     taskInputName.value = "";
     taskInputData.value = "";
@@ -109,6 +106,14 @@ function deleteTask(event) {
     saveToLocalStorage();
     parentNoteId.remove();
    }
+}
+
+for (let i = 0; i < taskSortUniq.length; i++) {
+    let optn = taskSortUniq[i];
+    let el = document.createElement("option");     
+    el.text = optn;
+    el.value = optn;
+    select.appendChild(el);
 }
 
 function saveToLocalStorage() {
@@ -150,19 +155,19 @@ function renderTask (task) {
             </button>
         </div>
     </li>`
-    
-    // Task in list
     taskList.insertAdjacentHTML('beforeend',taskHTML);
 }
 
-// function sortOfName(event) {
-//     event.preventDefault();
-//     // select.innerHTML = '';
-//     for (let i = 0; i < taskSortUniq.length; i++) {
-//         let optn = taskSortUniq[i];
-//         let el = document.createElement("option");     
-//         el.textContent = optn;
-//         el.value = optn;
-//         select.appendChild(el);
-//     }
-// }
+function sortOfName() {
+    const taskItem = document.getElementsByTagName('li');
+    let arrayFromTaskItem = Array.from(taskItem);
+    for(let i = 0; i < arrayFromTaskItem.length; i++) {
+        if (select.value === "" || arrayFromTaskItem[i].dataset.value === select.value) {
+            arrayFromTaskItem[i].classList = 'task-item';
+        } else {
+            arrayFromTaskItem[i].classList = 'task-item_invisible';
+        }
+    }
+}
+
+            

@@ -166,6 +166,10 @@
     align-items: center;
 }
 
+.task-item_invisible {
+    visibility: hidden;
+}
+
 .task-item__delete-button {
     transition: 0.2s ease;
 }
