@@ -1,8 +1,6 @@
-// Добавить сортировку по исполнителям 
-// Скорректировать верстку (Padding или margin у контейнера, что бы кнопка создать и поля формы уменьшались)
-// Добавить отметку выполнения выполненных задач (перечеркивание текста задачи при постановке галочки) + напоминание об удалении
+
 // Графики на дашборде
-// Общий рефакторинг перед отправкой Ромке
+// Общий рефакторинг перед отправкой
 
 const   form = document.querySelector('.create-task-block'),
         taskInfo = document.querySelector('.task-item__main-content_info'),
@@ -14,6 +12,7 @@ const   form = document.querySelector('.create-task-block'),
         checkBox = document.querySelectorAll('.checkbox-form__checkbox'),
         select = document.querySelector('#sortName'),
         selectBtn = document.querySelector('.sortName_btn');
+
         
 
 let tasks = [];
@@ -50,6 +49,8 @@ allNavButton.forEach((button) => {
 form.addEventListener('submit', addTask);
 
 taskList.addEventListener('click', deleteTask);
+
+taskList.addEventListener('click', doneTask);
 
 selectBtn.addEventListener('click', sortOfName);
 
@@ -136,11 +137,11 @@ function clearPositionOfLocalStorageUniqName() {
 
 function renderTask (task) {
     const taskHTML = `
-    <li class="task-item" id=${task.id} data-value='${task.name}'>
+    <li class="task-item" id=${task.id} data-value='${task.name}' >
         <div class="task-item__main-container">
             <div class="task-item__main-content">
                 <form class="checkbox-form">
-                <input class="checkbox-form__checkbox" type="checkbox" id="task-1">
+                <input class="checkbox-form__checkbox" type="checkbox" data-action='${task.done}'>
                 <label for="task-1"></label>
                 </form>
                 <div class="task-item__main-content_info">
@@ -164,10 +165,18 @@ function sortOfName() {
     for(let i = 0; i < arrayFromTaskItem.length; i++) {
         if (select.value === "" || arrayFromTaskItem[i].dataset.value === select.value) {
             arrayFromTaskItem[i].classList = 'task-item';
+            arrayFromTaskItem[i].style.order = 1;
         } else {
             arrayFromTaskItem[i].classList = 'task-item_invisible';
+            arrayFromTaskItem[i].style.order = -1;
         }
     }
 }
 
-            
+function doneTask(event) {
+    if(event.target.dataset.action === "false"){
+        const parentNode = event.target.closest('.task-item');
+        const taskTitle = parentNode.querySelector('.task-item__text')
+        taskTitle.classList.toggle('task-item__text--done')
+    }
+}
