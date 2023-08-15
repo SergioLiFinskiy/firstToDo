@@ -1,7 +1,4 @@
-
-// Графики на дашборде
-// Общий рефакторинг перед отправкой
-
+// Find components
 const   form = document.querySelector('.create-task-block'),
         taskInfo = document.querySelector('.task-item__main-content_info'),
         taskInputWords = document.querySelector('#createNewTask'),
@@ -13,24 +10,22 @@ const   form = document.querySelector('.create-task-block'),
         select = document.querySelector('#sortName'),
         selectBtn = document.querySelector('.sortName_btn');
 
-        
-
+// Crete arrays for save data
 let tasks = [];
 let taskSortOfName = [];
 let taskSortUniq = [];
 
-
-
+// Take data from localStorage
 if (localStorage.getItem('tasks')){
     tasks = JSON.parse(localStorage.getItem('tasks'));
     taskSortOfName = JSON.parse(localStorage.getItem('name'));
     taskSortUniq = JSON.parse(localStorage.getItem('sortName'));
 }
-
+// Render tasks from localStorage
 tasks.forEach((task) => {
     renderTask (task);
 })
-
+// Button's response
 allNavButton.forEach((button) => {
     button.addEventListener('mouseover', (event) => {
         allNavButton.forEach((button) => {
@@ -46,14 +41,19 @@ allNavButton.forEach((button) => {
     })
 }) 
 
+// Listner of creating task
 form.addEventListener('submit', addTask);
 
+// Listner of delete task
 taskList.addEventListener('click', deleteTask);
 
+// Listner Create or delete status of task (done or not)
 taskList.addEventListener('click', doneTask);
 
+// Listner Create option from Uniq task names
 selectBtn.addEventListener('click', sortOfName);
 
+// Function of create task
 function addTask (event) {
     event.preventDefault();
 
@@ -83,6 +83,7 @@ function addTask (event) {
     taskInputWords.focus();
 }
 
+// Function of delete task
 function deleteTask(event) {
    if (event.target.dataset.action === "delete") {
     const parentNoteId = event.target.closest('.task-item');
@@ -109,6 +110,7 @@ function deleteTask(event) {
    }
 }
 
+// loop for crete of uniq optin in select
 for (let i = 0; i < taskSortUniq.length; i++) {
     let optn = taskSortUniq[i];
     let el = document.createElement("option");     
@@ -117,6 +119,7 @@ for (let i = 0; i < taskSortUniq.length; i++) {
     select.appendChild(el);
 }
 
+//save LocalStorage
 function saveToLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     localStorage.setItem('name', JSON.stringify(taskSortOfName));
