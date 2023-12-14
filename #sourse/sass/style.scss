@@ -1,0 +1,336 @@
+@import "nullstyle.scss";
+$primary-color: #0179c0;
+$text-color: #0179c0;
+$delete-button-background: #ff0000;
+$checkbox-checked-background: #0179c0;
+$checkbox-border-color: #000;
+$checkbox-text-color: #fff;
+$error-color: #ff0000;
+
+* {
+  font-family: "Inter", sans-serif;
+  border-radius: 4px;
+}
+
+.container {
+  margin: 0.5vh 5vw;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks__wrapper {
+  margin: 0 0 2vh;
+}
+
+.tasks__wrapper span {
+  color: $text-color;
+  font-size: 3rem;
+  line-height: 5rem;
+}
+
+.sort {
+  margin: 1vh 0;
+}
+
+.sort span {
+  color: $text-color;
+  font-size: 2rem;
+  line-height: 3rem;
+}
+
+.main-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 2vh;
+}
+
+.main-navigation_name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-navigation_menu-button {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-navigation__button__buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-navigation__button-item {
+  position: relative;
+  color: $text-color;
+  padding: 2vh 2vw;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+#main-navigation__button-name {
+  color: $text-color;
+  padding: 4vh 2vw;
+  font-size: 3rem;
+  line-height: 2em;
+}
+
+.main-navigation__button-item_selected {
+  box-shadow: inset 0 0 0 2px #b0e0e6;
+}
+
+.create-task-block {
+  color: $text-color;
+  display: grid;
+  grid-template-columns: [full-start] 2fr [content-start] 1fr [content-end];
+  grid-template-rows: repeat(2, 1vr);
+  grid-gap: 1vw;
+}
+.create-task-block__input {
+  border: 1px solid $primary-color;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 2rem;
+  width: 100%;
+  resize: none;
+  padding: 5px 10px;
+}
+
+.create-task-block__button {
+  cursor: pointer;
+  background-color: $primary-color;
+  color: $checkbox-text-color;
+  border: none;
+  padding: 1vh 2vw;
+
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  grid-column-start: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  width: 100%;
+}
+.task-item__delete-button {
+  padding: 10px 3vw;
+  text-align: center;
+  cursor: pointer;
+  background-color: $primary-color;
+  color: $checkbox-text-color;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.5rem;
+}
+
+#createNewTask {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+#selectedContractor {
+  grid-column-start: 2;
+  grid-row-start: 1;
+}
+
+#createDeadline {
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
+
+.task-list_panel {
+  padding-inline-start: 0;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $primary-color;
+  padding: 10px 0;
+  list-style-type: none;
+  border-radius: 0;
+  align-items: center;
+}
+
+.task-item__main-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-item__main-content {
+  display: flex;
+  align-items: center;
+}
+
+.task-item_invisible {
+  // visibility: hidden;
+  display: none;
+}
+
+.task-item__delete-button {
+  transition: 0.2s ease;
+}
+
+.task-item__delete-button:hover {
+  background-color: $delete-button-background;
+}
+
+.task-item__main-content_info {
+  color: $text-color;
+  display: grid;
+  grid-template-columns: [full-start] 7fr [content-start] 1fr [content-end];
+  grid-template-rows: repeat(2, 1vr);
+  grid-auto-flow: dense;
+  grid-gap: 10px;
+  align-items: center;
+  margin: 0 2vw;
+}
+
+.task-item__text {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  color: $text-color;
+}
+
+.task-item__text--done {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  align-items: center;
+  text-decoration: line-through;
+}
+
+.task-item__name {
+  // font-size: 1.5rem;
+  line-height: 1.5rem;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  vertical-align: middle;
+}
+
+.task-item__data {
+  // font-size: 1.5rem;
+  line-height: 1.5rem;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  align-items: center;
+  justify-content: stretch;
+}
+
+#sortName {
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  color: $primary-color;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+#sortName {
+  padding: 5px 20px;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+}
+
+.sortName_btn {
+  cursor: pointer;
+  background-color: $primary-color;
+  color: $checkbox-text-color;
+  border: none;
+  padding: 2px 20px;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+}
+
+.chart-container {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: space-around;
+}
+#firstCanvas {
+  display: block;
+  box-sizing: border-box;
+  height: 434px;
+  width: 600px;
+}
+
+#secondCanvas {
+  display: block;
+  box-sizing: border-box;
+  height: 434px;
+  width: 434px;
+}
+
+@media (max-width: 767px) {
+  .create-task-block {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .sort {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .task-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .task-item__main-content_info {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .task-item__text {
+    text-align: justify;
+    font-style: italic;
+    border-bottom: 1px solid $primary-color;
+    border-radius: 0;
+    width: 100%;
+  }
+  .task-item__main-content_info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  .task-item__main-content_info > div:nth-last-of-type(-n + 2) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .task-item__delete-button {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .chart-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: fit-content;
+    text-align: center;
+  }
+  .chart-container {
+    div {
+      display: block;
+      width: 100%;
+      height: 50vh;
+      margin-bottom: 20px;
+    }
+  }
+}

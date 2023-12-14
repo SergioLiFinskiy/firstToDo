@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Dahsboards</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="main-navigation">
+        <div class="main-navigation_name">
+          <a
+            class="main-navigation__button-item"
+            id="main-navigation__button-name"
+          >
+            ДВУ ЦРиНО
+          </a>
+        </div>
+        <div class="main-navigation__button__buttons">
+          <div class="main-navigation_menu-button">
+            <a class="main-navigation__button-item" href="index.html"
+              >Текущие задачи</a
+            >
+          </div>
+          <div class="main-navigation_menu-button">
+            <a class="main-navigation__button-item" href="dahsboard.html"
+              >Dashboard</a
+            >
+          </div>
+        </div>
+      </header>
+      <div class="chart-container">
+        <div>
+          <canvas id="firstCanvas"></canvas>
+        </div>
+        <div>
+          <canvas id="secondCanvas"></canvas>
+        </div>  
+      </div>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dahsboard.js" defer></script>
+  </body>
+</html>
